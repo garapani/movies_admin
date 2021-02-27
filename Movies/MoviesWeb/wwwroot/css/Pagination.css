@@ -1,0 +1,31 @@
+﻿.pagination-wrapper {
+    padding-top: 1rem;
+    text-align: center;
+}
+
+.pagination-item-left {
+    float: left;
+    margin:15px;
+    margin-left:0px;
+}
+
+.pagination-item-right {
+    float: right;
+    margin: 15px;
+    margin-right: 0px;
+}
+
+.pagination-item--navigable {
+    display: inline-block;
+    cursor: pointer;
+}
+
+    .pagination-item--navigable.disabled {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .pagination-item--navigable:hover {
+        color: blue;
+    }
+

@@ -1,0 +1,75 @@
+﻿@model MoviesWeb.ViewModels.Director.DirectorIndexViewModel
+
+@{
+    ViewData["Title"] = "Directors";
+}
+
+<p>
+    <a asp-action="Create">Create new director</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@Model.SearchString" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-action="Index" asp-route-searchString="">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<div class="container">
+    @if (Model.Directors.Any())
+    {
+        <partial name="_pagination" for="@Model.PaginationInfo" />
+        <table class="table table-sm table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Directors[0].Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Directors[0].ImageUrl)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Directors[0].Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Directors[0].UpdatedAt)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Directors)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            <img src="~/@item.ImageUrl" height="50" width="50" alt="image" asp-append-version="true" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UpdatedAt)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <partial name="_pagination" for="@Model.PaginationInfo" />
+    }
+    else
+    {
+        <div>
+            <h3>There are no Directors available at present.</h3>
+        </div>
+    }
+</div>

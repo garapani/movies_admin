@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MoviesWeb</name>
+    </assembly>
+    <members>
+        <member name="M:MoviesWeb.Controllers.ActorsController.Index">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MoviesWeb.Controllers.ActorsController.Details(System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoviesWeb.Controllers.ActorsController.Create">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MoviesWeb.Controllers.ActorsController.Create(Domain.Entity.Actor)">
+            <summary>
+            
+            </summary>
+            <param name="actor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoviesWeb.Controllers.ActorsController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoviesWeb.Controllers.ActorsController.Edit(System.Int32,Domain.Entity.Actor)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="actor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoviesWeb.Controllers.ActorsController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoviesWeb.Controllers.ActorsController.DeleteConfirmed(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MoviesWeb.Startup">
+            <summary>
+            Startup class
+            </summary>
+        </member>
+        <member name="M:MoviesWeb.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            constructor
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:MoviesWeb.Startup.Configuration">
+            <summary>
+            Configuration
+            </summary>
+        </member>
+        <member name="M:MoviesWeb.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:MoviesWeb.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>

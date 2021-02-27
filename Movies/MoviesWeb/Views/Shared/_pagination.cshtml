@@ -1,0 +1,38 @@
+﻿@model MoviesWeb.ViewModels.PaginationInfoViewModel
+@{
+    var prevRouteData = Context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
+    if (prevRouteData.ContainsKey("pageId"))
+        prevRouteData.Remove("pageId");
+    prevRouteData.Add("pageId", (Model.PageIndex - 1).ToString());
+    var nextRouteData = Context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
+    if (nextRouteData.ContainsKey("pageId"))
+        nextRouteData.Remove("pageId");
+    nextRouteData.Add("pageId", (Model.PageIndex + 1).ToString());
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<div class="pagination">
+    <div class="container-fluid">
+        <article class="pagination-wrapper row">
+            <div class="row col-12">
+                <div class="col-6">
+                    <a class="pagination-item-left pagination-item--navigable @prevDisabled"
+                       id="Previous"
+                       asp-all-route-data="prevRouteData"
+                       aria-label="Previous">
+                        Previous
+                    </a>
+                </div>
+                <div class="col-6">
+                    <a class="pagination-item-right pagination-item--navigable @nextDisabled"
+                       id="Next"
+                       asp-all-route-data="nextRouteData"
+                       aria-label="Next">
+                        Next
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+

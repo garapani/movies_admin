@@ -1,0 +1,85 @@
+﻿@model MoviesWeb.ViewModels.Movie.EditMovieViewModel
+
+@{
+    ViewData["Title"] = "Edit Movie details";
+}
+<div class="card">
+    <div class="card-header">
+        <h3>Edit Movie</h3>
+    </div>
+    <div class="row card-body">
+        <div class="col-12">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <label asp-for="Title" class="control-label col-2"></label>
+                    <input asp-for="Title" class="form-control col-10" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="LocalTitle" class="control-label col-2"></label>
+                    <input asp-for="LocalTitle" class="form-control col-10" />
+                    <span asp-validation-for="LocalTitle" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Overview" class="control-label col-2"></label>
+                    <input asp-for="Overview" class="form-control col-10" />
+                    <span asp-validation-for="Overview" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="ReleaseDate" class="control-label col-2"></label>
+                    <input asp-for="ReleaseDate" type="date" class="form-control col-10" />
+                    <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                </div>
+                @*<div class="form-group row">
+                        <label asp-for="Tagline" class="control-label col-2"></label>
+                        <input asp-for="Tagline" class="form-control col-10" />
+                        <span asp-validation-for="Tagline" class="text-danger"></span>
+                    </div>*@
+                <div class="form-group row">
+                    <label asp-for="ImageUrl" class="control-label col-2"></label>
+                    <input asp-for="Photo" type="file" id="uploadedPhoto" class="form-control col-10" />
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                    <img id="previewImage" alt="Image" height="50" width="50" asp-append-version="true" style="display:none" />
+                </div>
+                <div class="form-group row">
+                    <input type="hidden" asp-for="ImageUrl" />
+                    <input type="hidden" asp-for="ImageId" />
+                    <img src="~/@Model.ImageUrl" height="50" width="50" alt="image" asp-append-version="true" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group row">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#previewImage').attr('src', e.target.result);
+                }
+                $("#previewImage").show();
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#uploadedPhoto").change(function () {
+            readURL(this);
+        });
+        $(document).ready(function () {
+            $("#previewImage").hide();
+        });
+    </script>
+}

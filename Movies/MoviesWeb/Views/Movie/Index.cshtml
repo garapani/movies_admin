@@ -1,0 +1,91 @@
+﻿@model MoviesWeb.ViewModels.Movie.MovieIndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New Movie</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@Model.SearchString" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-action="Index" asp-route-searchString="">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+<div class="container">
+    @if (Model.Movies.Any())
+    {
+        <partial name="_pagination" for="@Model.PaginationInfo" />
+        <table class="table table-sm table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Movies[0].Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Movies[0].LocalTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Movies[0].ImageUrl)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Movies[0].Overview)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Movies[0].UpdatedAt)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Movies)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocalTitle)
+                        </td>
+                        <td>
+                            <img src="~/@item.ImageUrl" height="50" width="50" alt="image" asp-append-version="true"/>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Overview)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReleaseDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UpdatedAt)
+                        </td>
+                        <td>
+                            <a asp-controller="Cast" asp-action="Index" asp-route-movieId="@item.Id">Add Edit Cast</a> |
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <partial name="_pagination" for="@Model.PaginationInfo" />
+    }
+    else
+    {
+        <div class="col-12 row">
+            <h3>There are no movies available at present.</h3>
+        </div>
+    }
+</div>
+
