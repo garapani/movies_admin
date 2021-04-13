@@ -47,9 +47,6 @@ namespace MoviesWeb.ViewModels.Movie
         public DateTime CreatedAt { get; set; }
 
         [Display(Name = "Image")]
-        public int ImageId { get; set; }
-
-        [Display(Name = "Image")]
         public string ImageUrl { get; set; }
     }
 }

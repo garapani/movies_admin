@@ -1,12 +1,23 @@
-﻿using Domain.Common;
+﻿using System.Collections.Generic;
+using Domain.Common;
 namespace Domain.Entity
 {
-    public class Video: BaseEntity, IAggregateRoot
+    public class Video: ValueObject<Video>
     {
-        public Video()
+        private Video()
         {
         }
 
-        public string VideoUrl { get; set; }
+        public Video(string videoUrl)
+        {
+            VideoUrl = videoUrl;
+        }
+
+        public string VideoUrl { get; }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return VideoUrl;
+        }
     }
 }

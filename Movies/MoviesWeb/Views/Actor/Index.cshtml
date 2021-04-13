@@ -1,4 +1,5 @@
-﻿@model MoviesWeb.ViewModels.Actor.ActorIndexViewModel
+﻿@using MoviesWeb.ViewModels.Actor 
+@model PaginatedList<ActorViewModel>
 
 @{
     ViewData["Title"] = "Actors";
@@ -18,7 +19,7 @@
     </div>
 </form>
 <div class="container">
-    @if (Model.Actors.Any())
+    @if (Model.Any())
     {
         <partial name="_pagination" for="@Model.PaginationInfo" />
         <table class="table table-sm table-striped table-bordered">
@@ -34,7 +35,7 @@
                         @Html.DisplayNameFor(model => model.Actors[0].Description)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Actors[0].UpdatedAt)
+                        @Html.DisplayNameFor(model => model.Actors[0].LastModifiedAt)
                     </th>
                     <th></th>
                 </tr>
@@ -53,7 +54,7 @@
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.UpdatedAt)
+                            @Html.DisplayFor(modelItem => item.LastModifiedAt)
                         </td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

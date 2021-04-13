@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using ApplicationCore.Features.MovieFeatures.Queries;
 using ApplicationCore.Features.MovieFeatures.Commands;
 using ApplicationCore.Paging;
-using AutoMapper;
-using Domain.Entity;
-using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MoviesWeb.Utils;
 using MoviesWeb.ViewModels.Movie;
+using AutoMapper;
+using MediatR;
+using Domain.Entity;
 
 namespace MoviesWeb.Controllers
 {

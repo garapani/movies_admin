@@ -1,18 +1,16 @@
-﻿using ApplicationCore.Interfaces.Repositories;
-using ApplicationCore.Paging;
-using ApplicationCore.Specifications;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
 using Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ApplicationCore.Interfaces.Repositories;
 
 namespace Persistence.Data
 {
-    public class EfRepository<TEntity> : IAsyncRepository<TEntity> where TEntity : BaseEntity, IAggregateRoot
+    public class EfRepository<TEntity> : IAsyncRepository<TEntity> where TEntity : AuditableEntity, IAggregateRoot
     {
         protected readonly MoviesDBContext _dbContext;
 
@@ -26,14 +24,9 @@ namespace Persistence.Data
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<IReadOnlyList<TEntity>> ListAllAsync()
+        public IQueryable<TEntity> ListAsync(ISpecification<TEntity> spec)
         {
-            return await _dbContext.Set<TEntity>().ToListAsync();
-        }
-
-        public async Task<IReadOnlyList<TEntity>> ListAsync(ISpecification<TEntity> spec)
-        {
-            return await ApplySpecification(spec).ToListAsync();
+            return ApplySpecification(spec);
         }
 
         public async Task<int> CountAsync(ISpecification<TEntity> spec)
@@ -51,8 +44,6 @@ namespace Persistence.Data
 
         public async Task<TEntity> AddAsync(TEntity entity)
         {
-            entity.CreatedAt = DateTime.Now;
-            entity.UpdatedAt = DateTime.Now;
             await _dbContext.Set<TEntity>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
@@ -61,7 +52,6 @@ namespace Persistence.Data
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            entity.UpdatedAt = DateTime.Now;
             _dbContext.Set<TEntity>().Update(entity);
             await _dbContext.SaveChangesAsync();
             return entity;
@@ -88,7 +78,8 @@ namespace Persistence.Data
 
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> spec)
         {
-            return new EfSpecificationEvaluator<TEntity>().GetQuery(_dbContext.Set<TEntity>().AsQueryable(), spec);
+            var evaluator = new SpecificationEvaluator();
+            return evaluator.GetQuery(_dbContext.Set<TEntity>().AsQueryable(), spec);
         }
     }
 }

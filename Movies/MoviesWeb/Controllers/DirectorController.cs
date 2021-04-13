@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApplicationCore.Features.DirectorFeatures.Queries;
 using ApplicationCore.Features.DirectorFeatures.Commands;
-using ApplicationCore.Paging;
 using AutoMapper;
 using Domain.Entity;
 using MediatR;

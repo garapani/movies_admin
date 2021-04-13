@@ -26,7 +26,6 @@
                 </div>
                 <div class="form-group row">
                     <input type="hidden" asp-for="ImageUrl" />
-                    <input type="hidden" asp-for="ImageId" />
                     <img src="~/@Model.ImageUrl" height="50" width="50" alt="image" asp-append-version="true" />
                     <span asp-validation-for="ImageUrl" class="text-danger"></span>
                 </div>

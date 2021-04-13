@@ -22,19 +22,17 @@ namespace MoviesWeb.ViewModels.Actor
         [DataType(DataType.Upload)]
         [MaxFileSize(5 * 1024 * 1024)]
         [Display(Name = "Upload actor image")]
-        [AllowedExtensions(new string[] { ".jpg", ".png", ".jfif" })]
+        [AllowedExtensions(new string[] { ".jpg",".jpeg", ".png", ".jfif" })]
         public IFormFile Photo { get; set; }
 
         [Required]
         [Display(Name ="Description", Prompt = "Enter description")]
         public string Description { get; set; }
 
-        //[HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTimeOffset UpdatedAt { get; set; }
+        [Display(Name = "Modified Time")]
+        public DateTime LastModifiedAt { get; set; }
 
-        //[HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTimeOffset CreatedAt { get; set; }
+        [Display(Name = "Created Time")]
+        public DateTime CreatedAt { get; set; }
     }
 }

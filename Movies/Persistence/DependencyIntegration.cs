@@ -1,9 +1,9 @@
-﻿using ApplicationCore.Interfaces.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Context;
 using Persistence.Data;
+using ApplicationCore.Interfaces.Repositories;
 
 namespace Persistence
 {

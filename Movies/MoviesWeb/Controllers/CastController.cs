@@ -2,8 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationCore.Features.ActorFeatures.Queries;
-using ApplicationCore.Features.CastFeatures.Commands;
-using ApplicationCore.Features.CastFeatures.Queries;
 using ApplicationCore.Features.MovieFeatures.Queries;
 using AutoMapper;
 using Domain.Entity;
@@ -31,21 +29,25 @@ namespace MoviesWeb.Controllers
         {
             var movieDetails = await _mediator.Send(new GetMovieByIdQuery(movieId));
             var movieViewModel = _mapper.Map<MovieViewModel>(movieDetails);
-            var castDetails = await _mediator.Send(new GetCastDetailsByMovieIdQuery(movieId));
-            var movieCastViewModel = _mapper.Map<IEnumerable<MovieCastViewModel>>(castDetails.ToList());
-            var movieCastIndexViewModel = new MovieCastIndexViewModel
-            {
-                Movie = movieViewModel,
-                Cast = movieCastViewModel
-            };
-            return View(movieCastIndexViewModel);
+            //venkat
+            //var castDetails = await _mediator.Send(new GetCastDetailsByMovieIdQuery(movieId));
+            //var movieCastViewModel = _mapper.Map<IEnumerable<MovieCastViewModel>>(castDetails.ToList());
+            //var movieCastIndexViewModel = new MovieCastIndexViewModel
+            //{
+            //    Movie = movieViewModel,
+            //    Cast = movieCastViewModel
+            //};
+            //return View(movieCastIndexViewModel);
+            return View(new MovieCastIndexViewModel());
         }
 
         public async Task<IActionResult> Edit(int movieId, int actorId)
         {
-            var castDetails = await _mediator.Send(new GetCastDetailsQuery(movieId, actorId));
-            var movieCastViewModel = _mapper.Map<MovieCastViewModel>(castDetails);
-            return View(movieCastViewModel);
+            //venkat
+            //var castDetails = await _mediator.Send(new GetCastDetailsQuery(movieId, actorId));
+            //var movieCastViewModel = _mapper.Map<MovieCastViewModel>(castDetails);
+            //return View(movieCastViewModel);
+            return View(new MovieCastViewModel());
         }
 
         [HttpPost, ActionName("Edit")]
@@ -59,8 +61,9 @@ namespace MoviesWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                var cast = _mapper.Map<MovieCast>(movieCastViewModel);
-                var updatedCast = await _mediator.Send(new UpdateCastCommand(cast));
+                var cast = _mapper.Map<MovieActor>(movieCastViewModel);
+                //venkat
+                //var updatedCast = await _mediator.Send(new UpdateCastCommand(cast));
                 return RedirectToAction(nameof(Index), new RouteValueDictionary(new { movieCastViewModel.MovieId }));
             }
             return View(movieCastViewModel);
@@ -85,32 +88,36 @@ namespace MoviesWeb.Controllers
             {
                 return View(movieCastCreateViewModel);
             }
-            var castDetails = await _mediator.Send(new GetCastDetailsByMovieIdQuery(movieId.Value));
-            if (castDetails != null)
-            {
-                if (castDetails.FirstOrDefault(c => c.ActorId == movieCastCreateViewModel.ActorId) != null)
-                {
-                    ModelState.AddModelError("ActorId", "Actor is already present as cast.So please select other actor");
-                    return View(movieCastCreateViewModel);
-                    //return RedirectToAction(nameof(Create), new RouteValueDictionary(new { movieId = movieId.Value }));
-                }
-            }
+            //venkat
+            //var castDetails = await _mediator.Send(new GetCastDetailsByMovieIdQuery(movieId.Value));
 
-            var movieCast = _mapper.Map<MovieCast>(movieCastCreateViewModel);
+            //if (castDetails != null)
+            //{
+            //    if (castDetails.FirstOrDefault(c => c.ActorId == movieCastCreateViewModel.ActorId) != null)
+            //    {
+            //        ModelState.AddModelError("ActorId", "Actor is already present as cast.So please select other actor");
+            //        return View(movieCastCreateViewModel);
+            //        //return RedirectToAction(nameof(Create), new RouteValueDictionary(new { movieId = movieId.Value }));
+            //    }
+            //}
+
+            var movieCast = _mapper.Map<MovieActor>(movieCastCreateViewModel);
             var movie = await _mediator.Send(new GetMovieByIdQuery(movieCast.MovieId));
             var actor = await _mediator.Send(new GetActorByIdQuery(movieCast.ActorId));
             movieCast.Movie = movie;
             movieCast.Actor = actor;
-            var createdCast = await _mediator.Send(new CreateCastCommand(movieCast));
-            return RedirectToAction(nameof(Index), new RouteValueDictionary(new { createdCast.MovieId }));
+            //var createdCast = await _mediator.Send(new CreateCastCommand(movieCast));
+            //return RedirectToAction(nameof(Index), new RouteValueDictionary(new { createdCast.MovieId }));
+            return View(movieCastCreateViewModel);
         }
         // GET: CastController/Delete?actorId=5&moveId=5
         public async Task<IActionResult> Delete(int? actorId, int? movieId)
         {
             if (actorId != null && movieId != null)
             {
-                var movieCast = await _mediator.Send(new GetCastDetailsQuery(movieId.Value, actorId.Value));
-                return movieCast != null ? View(_mapper.Map<MovieCastViewModel>(movieCast)) : (IActionResult)NotFound();
+                //venkat
+                //var movieCast = await _mediator.Send(new GetCastDetailsQuery(movieId.Value, actorId.Value));
+                //return movieCast != null ? View(_mapper.Map<MovieCastViewModel>(movieCast)) : (IActionResult)NotFound();
             }
             return NotFound();
         }
@@ -120,8 +127,10 @@ namespace MoviesWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int actorId, int movieId, IFormCollection collection)
         {
-            var isDeleted = await _mediator.Send(new DeleteCastCommand(movieId, actorId));
-            return isDeleted ? RedirectToAction(nameof(Index), new { movieId = movieId }) : (IActionResult)NotFound();
+            //venkat
+            //var isDeleted = await _mediator.Send(new DeleteCastCommand(movieId, actorId));
+            //return isDeleted ? RedirectToAction(nameof(Index), new { movieId = movieId }) : (IActionResult)NotFound();
+            return NotFound();
         }
     }
 }

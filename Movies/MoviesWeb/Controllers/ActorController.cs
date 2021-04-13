@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApplicationCore.Features.ActorFeatures.Commands;
 using ApplicationCore.Features.ActorFeatures.Queries;
-using ApplicationCore.Features.ImageFeatures.Commands;
-using ApplicationCore.Paging;
 using AutoMapper;
 using Domain.Entity;
 using MediatR;
@@ -30,6 +28,7 @@ namespace MoviesWeb.Controllers
             string searchString = string.Empty;
             int pageIndex = 0;            
             int itemsPerPage = Constants.ITEMS_PER_PAGE;
+
             if (searchQueryParams != null)
             {
                 int.TryParse(searchQueryParams.PageId, out pageIndex);
@@ -38,21 +37,21 @@ namespace MoviesWeb.Controllers
             }
 
             var paginatedActors = await _mediator.Send(new GetPaginatedActorsQuery(searchString, pageIndex, itemsPerPage));
-
-            var actorIndexViewModel = new ActorIndexViewModel
-            {
-                Actors = _mapper.Map<List<ActorViewModel>>(paginatedActors.AsEnumerable<Actor>()),
-                PaginationInfo = new ViewModels.PaginationInfoViewModel
-                {
-                    PageIndex = paginatedActors.PageIndex,
-                    ItemsPerPage = paginatedActors.ItemsPerPage,
-                    TotalPages = paginatedActors.TotalPages,
-                    HasNextPage = paginatedActors.HasNextPage,
-                    HasPreviousPage = paginatedActors.HasPreviousPage
-                },
-                SearchString = searchString
-            };
-            return View(actorIndexViewModel);
+            return View(paginatedActors);
+            //var actorIndexViewModel = new ActorIndexViewModel
+            //{
+            //    Actors = _mapper.Map<List<ActorViewModel>>(paginatedActors.AsEnumerable<Actor>()),
+            //    PaginationInfo = new ViewModels.PaginationInfoViewModel
+            //    {
+            //        PageIndex = paginatedActors.PageIndex,
+            //        ItemsPerPage = paginatedActors.ItemsPerPage,
+            //        TotalPages = paginatedActors.TotalPages,
+            //        HasNextPage = paginatedActors.HasNextPage,
+            //        HasPreviousPage = paginatedActors.HasPreviousPage
+            //    },
+            //    SearchString = searchString
+            //};
+            //return View(actorIndexViewModel);
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -82,15 +81,12 @@ namespace MoviesWeb.Controllers
             if (ModelState.IsValid)
             {
                 string newFileName = FileUtil.SaveFileToPhysicalLocation(actorViewModel.Name, actorViewModel.Photo);
-                var image = new Image()
-                {
-                    ImageUrl = Path.Combine("Images", newFileName)
-                };
-
-                var updatedImage = await _mediator.Send(new CreateImageCommand(image));
+                var uploadedImage = new Image(Path.Combine("Images", newFileName));
+                // venkat
+                //var updatedImage = await _mediator.Send(new CreateImageCommand(image));
                 var actor = _mapper.Map<Actor>(actorViewModel);
-                actor.Image = updatedImage;
-                actor.ImageId = updatedImage.Id;
+                
+                actor.Image = uploadedImage;
                 var updatedActor = await _mediator.Send(new CreateActorCommand(actor));
                 return RedirectToAction(nameof(Index));
             }

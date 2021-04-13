@@ -15,22 +15,22 @@ namespace MoviesWeb.MapperProfiles
         {
             CreateMap<Actor, ActorViewModel>();
             CreateMap<Actor[], IEnumerable<ActorViewModel>>();
-            CreateMap<PaginatedList<Actor>, PaginatedList<ActorViewModel>>();
             CreateMap<Actor, EditActorViewModel>();
+            CreateMap<PaginatedList<Actor>, PaginatedList<ActorViewModel>>();
 
             CreateMap<Director, DirectorViewModel>();
             CreateMap<Director[], IEnumerable<DirectorViewModel>>();
-            CreateMap<PaginatedList<Director>, PaginatedList<DirectorViewModel>>();
             CreateMap<Director, EditDirectorViewModel>();
+            CreateMap<PaginatedList<Director>, PaginatedList<DirectorViewModel>>();
 
             CreateMap<Movie, MovieViewModel>().ForMember(d => d.ImageUrl, opt => opt.MapFrom(s => s.Image.ImageUrl));
             CreateMap<Movie[], IEnumerable<MovieViewModel>>();
-            CreateMap<PaginatedList<Movie>, PaginatedList<MovieViewModel>>();
             CreateMap<Movie, EditMovieViewModel>();
+            CreateMap<PaginatedList<Movie>, PaginatedList<MovieViewModel>>();
 
-            CreateMap<MovieCast, MovieCastViewModel>();
-            CreateMap<MovieCast[], IEnumerable<MovieCastViewModel>>();
-            CreateMap<PaginatedList<MovieCast>, PaginatedList<MovieCastViewModel>>();
+            CreateMap<MovieActor, MovieCastViewModel>();
+            CreateMap<MovieActor[], IEnumerable<MovieCastViewModel>>();
+            CreateMap<PaginatedList<MovieActor>, PaginatedList<MovieCastViewModel>>();
         }
     }
 }

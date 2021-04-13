@@ -14,9 +14,6 @@ namespace MoviesWeb.ViewModels.Director
         [Required]
         [Display(Name = "Director Name", Prompt = "Enter Director name")]
         public string Name { get; set; }
-
-        [Display(Name = "Image")]
-        public string ImageId { get; set; }
         [Display(Name = "Image")]
         public string ImageUrl { get; set; }
 

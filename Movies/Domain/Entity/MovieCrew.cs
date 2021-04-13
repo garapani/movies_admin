@@ -1,12 +1,8 @@
 ﻿using Domain.Common;
 namespace Domain.Entity
 {
-    public class MovieCrew : IAggregateRoot
+    public class MovieCrew: AuditableEntity
     {
-        public MovieCrew()
-        {
-        }
-
         public int MovieId { get; set; }
         public virtual Movie Movie { get; set; }
 

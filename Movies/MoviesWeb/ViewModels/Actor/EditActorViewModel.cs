@@ -15,8 +15,8 @@ namespace MoviesWeb.ViewModels.Actor
         [Display(Name = "Actor Name", Prompt = "Enter Actor name")]
         public string Name { get; set; }
 
-        [Display(Name="Image")]
-        public string ImageId { get; set; }
+        //[Display(Name="Image")]
+        //public string ImageId { get; set; }
         [Display(Name = "Image")]
         public string ImageUrl { get; set; }
 
