@@ -12,6 +12,11 @@ namespace Domain.Entity
             Name = name;
         }
 
+        public Language( string name)
+        {
+            Name = name;
+        }
+
         public string Code { get;}
         public string Name { get;}
 

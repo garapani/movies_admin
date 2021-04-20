@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MoviesWeb.CustomAttributes.Validation;
-using MoviesWeb.ViewModels.MovieCast;
+using MoviesWeb.ViewModels.MovieActor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,6 +25,7 @@ namespace MoviesWeb.ViewModels.Movie
         public string Overview { get; set; }
 
         [Display(Name = "Release Date", Prompt = "Enter release date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? ReleaseDate { get; set; }
 
         [Display(Name = "Run time", Prompt = "Enter run time")]
@@ -38,19 +39,31 @@ namespace MoviesWeb.ViewModels.Movie
         [Required(ErrorMessage = "Please select a file.")]
         [DataType(DataType.Upload)]
         [MaxFileSize(5 * 1024 * 1024)]
-        [AllowedExtensions(new string[] { ".jpg", ".png", ".jfif" })]
+        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".jfif" })]
         [Display(Name = "Movie Image", Prompt = "Upload movie image")]
         public IFormFile Photo { get; set; }
+
+        [Display(Name = "Video Url", Prompt ="Please provide video url")]
+        public string VideoUrl { get; set; }
 
         [Display(Name = "Movie Image")]
         public string ImageUrl { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime UpdatedAt { get; set; }
+        [Display(Name = "Movie Language")]
+        public string Language { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Created Time")]
         public DateTime CreatedAt { get; set; }
 
-        public IEnumerable<MovieCastViewModel> Cast { get; set; }
+        [Display(Name = "Created By")]
+        public string CreatedBy { get; set; }
+
+        [Display(Name = "Last Modified Time")]
+        public DateTime LastModifiedAt { get; set; }
+
+        [Display(Name = "Last Modified By")]
+        public string LastModifiedBy { get; set; }
+
+        public IEnumerable<MovieActorViewModel> MovieActors { get; set; }
     }
 }

@@ -29,10 +29,20 @@ namespace MoviesWeb.ViewModels.Actor
         [Display(Name ="Description", Prompt = "Enter description")]
         public string Description { get; set; }
 
-        [Display(Name = "Modified Time")]
-        public DateTime LastModifiedAt { get; set; }
-
         [Display(Name = "Created Time")]
         public DateTime CreatedAt { get; set; }
+
+        [Display(Name = "Created By")]
+        public string CreatedBy { get; set; }
+
+
+        [Display(Name = "Last Modified Time")]
+        public DateTime LastModifiedAt { get; set; }
+
+        [Display(Name = "Last Modified By")]
+        public string LastModifiedBy { get; set; }
+
+        public string Gender { get; set; }
+
     }
 }

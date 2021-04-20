@@ -8,5 +8,7 @@ namespace Domain.Entity
 
         public int CrewId { get; set; }
         public virtual Crew Crew { get; set; }
+
+        public int Order { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Persistence.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("ActorID");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CreatedBy")
@@ -32,7 +32,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("LastModified")
+                    b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastModifiedBy")
@@ -53,7 +53,7 @@ namespace Persistence.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("CrewID");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CreatedBy")
@@ -62,7 +62,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("LastModified")
+                    b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastModifiedBy")
@@ -83,7 +83,7 @@ namespace Persistence.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("DirectorID");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CreatedBy")
@@ -92,7 +92,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("LastModified")
+                    b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastModifiedBy")
@@ -113,7 +113,7 @@ namespace Persistence.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("MovieID");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CreatedBy")
@@ -125,7 +125,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Keywords")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("LastModified")
+                    b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastModifiedBy")
@@ -174,13 +174,13 @@ namespace Persistence.Migrations
                     b.Property<string>("CharacterName")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("LastModified")
+                    b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastModifiedBy")
@@ -202,17 +202,20 @@ namespace Persistence.Migrations
                     b.Property<int>("CrewId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("LastModified")
+                    b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("MovieId", "CrewId")
                         .HasAnnotation("SqlServer:Clustered", false);
@@ -230,13 +233,13 @@ namespace Persistence.Migrations
                     b.Property<int>("DirectorId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("LastModified")
+                    b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastModifiedBy")
@@ -421,11 +424,9 @@ namespace Persistence.Migrations
                     b.Navigation("Image")
                         .IsRequired();
 
-                    b.Navigation("Language")
-                        .IsRequired();
+                    b.Navigation("Language");
 
-                    b.Navigation("Video")
-                        .IsRequired();
+                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("Domain.Entity.MovieActor", b =>

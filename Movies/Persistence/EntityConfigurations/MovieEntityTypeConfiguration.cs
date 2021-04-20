@@ -25,13 +25,13 @@ namespace Persistence.EntityConfigurations
             {
                 i.WithOwner();
                 i.Property(i => i.VideoUrl).HasColumnName("VideoUrl").IsRequired();
-            }).Navigation(p => p.Video).IsRequired();
+            }).Navigation(p => p.Video);
 
             movieEntityTypeBuilder.OwnsOne(a => a.Language, i =>
             {
                 i.WithOwner();
                 i.Property(i => i.Name).HasColumnName("Language").IsRequired();
-            }).Navigation(p => p.Language).IsRequired();
+            }).Navigation(p => p.Language);
 
             movieEntityTypeBuilder.Property(m =>m.Keywords)
                 .HasConversion(

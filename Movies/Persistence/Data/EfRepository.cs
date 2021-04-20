@@ -7,6 +7,7 @@ using Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using ApplicationCore.Interfaces.Repositories;
+using ApplicationCore.Paging;
 
 namespace Persistence.Data
 {
@@ -24,9 +25,20 @@ namespace Persistence.Data
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
-        public IQueryable<TEntity> ListAsync(ISpecification<TEntity> spec)
+        public async Task<IReadOnlyList<TEntity>> ListAllAsync()
         {
-            return ApplySpecification(spec);
+            return await _dbContext.Set<TEntity>().ToListAsync();
+        }
+
+        public async Task<PaginatedList<TEntity>> ListAsync(ISpecification<TEntity> spec, PagingInfo pagingInfo)
+        {
+            var specificationResult = ApplySpecification(spec);
+            return await PaginatedList<TEntity>.CreateAsync(specificationResult, pagingInfo.PageIndex, pagingInfo.PageSize);
+        }
+
+        public async Task<IReadOnlyList<TEntity>> ListAsync(ISpecification<TEntity> spec)
+        {
+            return await ApplySpecification(spec).ToListAsync();
         }
 
         public async Task<int> CountAsync(ISpecification<TEntity> spec)

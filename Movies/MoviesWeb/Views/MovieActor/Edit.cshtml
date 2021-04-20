@@ -1,0 +1,150 @@
+﻿@model MoviesWeb.ViewModels.MovieActor.MovieActorViewModel
+@{
+    ViewData["Title"] = "Edit Movie cast details";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3>Edit Cast Details</h3>
+    </div>
+    <div class="row card-body">
+        <div class="col-12">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="card">
+                    <div class="card-subtitle p-1 m-1">
+                        <h4>Movie details</h4>
+                    </div>
+                    <div class="card-body m-1">
+                        <input type="hidden" asp-for="MovieId" />
+                        <div class="form-group row">
+                            <label asp-for="Movie.Title" class="control-label col-2"></label>
+                            <input asp-for="Movie.Title" disabled class="form-control col-10" />
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Movie.ImageUrl" class="control-label col-2"></label>
+                            <img src="~/@Model.Movie.ImageUrl" height="50" width="50" alt="image" asp-append-version="true" />
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div class="card-subtitle m-1 p-1">
+                            <h4>Edit cast details</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <input type="hidden" asp-for="ActorId" />
+                                <div class="form-group row">
+                                    <label asp-for="Actor.Name" class="control-label col-2"></label>
+                                    <input asp-for="Actor.Name" disabled class="form-control col-10" />
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="Actor.ImageUrl" class="control-label col-2"></label>
+                                    <img src="~/@Model.Actor.ImageUrl" height="50" width="50" alt="image" asp-append-version="true" />
+                                </div>
+                                @*<label class="control-label col-2">Select actor</label>*@
+                                @*@Html.DropDownListFor(n => n.ActorId, Enumerable.Empty<SelectListItem>(), new { @id = "txtActorId", @style = "width:300px;" })
+                                @Html.ValidationMessageFor(n => n.ActorId)*@
+                                @*<select asp-for="Actor.Name" class="choose-actor form-control col-10">
+            <option></option>
+        </select>*@
+                            </div>
+
+                            <div class="form-group row">
+                                <label asp-for="CharacterName" class="control-label col-2"></label>
+                                <input asp-for="CharacterName" class="form-control col-10" />
+                            </div>
+
+                            <div class="form-group row">
+                                <label asp-for="CastOrder" class="control-label col-2"></label>
+                                <input asp-for="CastOrder" class="form-control col-10" />
+                            </div>
+                            <div class="form-group row">
+                                <input type="submit" value="Save" class="btn btn-primary m-1 p-1 col-1" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+    $(document).ready(function () {
+        //$(".choose-actor").select2({
+        //    ajax: {
+        //        url: '/api/actor',
+        //        dataType: 'json',
+        //        data: function (params) {
+        //            return {
+        //                prefix: params.term // search term
+        //            };
+        //        },
+        //        processResults: function (data) {
+        //            return {
+        //                results: data
+        //            };
+        //        },
+        //        cache: true
+        //    },
+        //    placeholder: 'Select actor',
+        //    minimumInputLength: 1,
+        //    templateResult: formatRepo,
+        //    templateSelection: formatRepoSelection
+        //});
+        $('#txtActorId').select2(
+            {
+                ajax: {
+                url: '/api/actor',
+                dataType: 'json',
+                data: function (params) {
+                    return {
+                        prefix: params.term // search term
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Select actor',
+            minimumInputLength: 1,
+            templateResult: formatRepo,
+            templateSelection: formatRepoSelection
+            });
+    });
+
+    function formatRepo(repo) {
+        console.log(repo);
+        if (repo.loading) {
+            return repo.text;
+        }
+        var rootPath = "@Url.Content("~/")";
+        console.log(rootPath);
+        var imageUrl = rootPath + repo.imageUrl;
+        console.log(imageUrl);
+        var $container = $(
+            "<div class='select2-result-repository clearfix row col-12'>" +
+                "<div class='select2-result-repository__avatar'>" +
+                    "<img src='" + imageUrl + "' style='width:50px;height:50px' />" +
+                "</div>" +
+                "<div class='select2-result-repository__meta'>" +
+                    "<div class='select2-result-repository__title'>" + repo.name + "</div>" +
+                "</div>" +
+            "</div>");
+        return $container;
+        }
+        function formatRepoSelection(repo) {
+            return repo.name;
+        }
+    </script>
+}

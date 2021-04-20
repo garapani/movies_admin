@@ -11,6 +11,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MoviesWeb.Utils;
 using MoviesWeb.ViewModels.Director;
+using ApplicationCore.Paging;
 
 namespace MoviesWeb.Controllers
 {
@@ -25,18 +26,17 @@ namespace MoviesWeb.Controllers
             _mediator = mediator;
         }
 
-        public async Task<ActionResult> Index([FromQuery] QueryParams searchQueryParams)
+        public async Task<ActionResult> Index([FromQuery] QueryParams queryParams)
         {
             string searchString = string.Empty;
-            int pageIndex = 0;
+            int pageIndex = 1;
             int itemsPerPage = Constants.ITEMS_PER_PAGE;
-            if (searchQueryParams != null)
+            if (queryParams != null)
             {
-                int.TryParse(searchQueryParams.PageId, out pageIndex);
-                searchString = searchQueryParams.SearchString;
-                itemsPerPage = Constants.ITEMS_PER_PAGE;
+                searchString = queryParams.SearchString;
+                pageIndex = queryParams.PageNumber;
+                itemsPerPage = queryParams.ItemsPerPage ?? 0;
             }
-
             var paginatedDirectors = await _mediator.Send(new GetPaginatedDirectorsQuery(searchString, pageIndex, itemsPerPage));
 
             var directorIndexViewModel = new DirectorIndexViewModel

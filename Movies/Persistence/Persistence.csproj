@@ -24,5 +24,6 @@
   <ItemGroup>
     <Folder Include="EntityConfigurations\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>

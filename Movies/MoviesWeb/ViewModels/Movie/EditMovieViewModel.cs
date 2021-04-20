@@ -38,15 +38,13 @@ namespace MoviesWeb.ViewModels.Movie
         [AllowedExtensions(new string[] { ".jpg", ".png",".jfif" })]
         public IFormFile Photo { get; set; }
 
-        [HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime UpdatedAt { get; set; }
-
-        [HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime CreatedAt { get; set; }
-
         [Display(Name = "Image")]
         public string ImageUrl { get; set; }
+
+        [Display(Name = "Video url")]
+        public string VideoUrl { get; set; }
+
+        [Display(Name = "Language")]
+        public string Language { get; set; }
     }
 }

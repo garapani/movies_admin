@@ -5,11 +5,11 @@ using ApplicationCore.Interfaces.Repositories;
 using ApplicationCore.Specifications.ActorSpecifications;
 using Domain.Entity;
 using MediatR;
-using ReflectionIT.Mvc.Paging;
+using ApplicationCore.Paging;
 
 namespace ApplicationCore.Features.ActorFeatures.Queries
 {
-    public class GetPaginatedActorsQuery : IRequest<PagingList<Actor>>
+    public class GetPaginatedActorsQuery : IRequest<PaginatedList<Actor>>
     {
         public GetPaginatedActorsQuery(string searchString, int pageIndex, int pageSize)
         {
@@ -23,7 +23,7 @@ namespace ApplicationCore.Features.ActorFeatures.Queries
         public int PageSize { get; set; }
     }
 
-    public class GetPaginatedActorsQueryHandle : IRequestHandler<GetPaginatedActorsQuery, PagingList<Actor>>
+    public class GetPaginatedActorsQueryHandle : IRequestHandler<GetPaginatedActorsQuery, PaginatedList<Actor>>
     {
         private readonly IAsyncRepository<Actor> _repositoryAsync;
 
@@ -32,11 +32,11 @@ namespace ApplicationCore.Features.ActorFeatures.Queries
             _repositoryAsync = repositoryAsync;
         }
 
-        public async Task<PagingList<Actor>> Handle(GetPaginatedActorsQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedList<Actor>> Handle(GetPaginatedActorsQuery request, CancellationToken cancellationToken)
         {
-            var paginatedActors = _repositoryAsync.ListAsync(new GetPaginatedActorsWithItemsSpecfication(request.SearchString, request.PageIndex, request.PageSize));
+            var paginatedActors = await _repositoryAsync.ListAsync(new GetPaginatedActorsWithItemsSpecfication(request.SearchString, request.PageIndex, request.PageSize));
             var totalItems = await _repositoryAsync.CountAsync(new GetActorsSpecification(request.SearchString));
-            return await PagingList.CreateAsync<Actor>(paginatedActors.OrderBy(p => p.ActorId),request.PageSize, request.PageIndex);
+            return new PaginatedList<Actor>(paginatedActors.ToList(), totalItems, request.PageIndex, request.PageSize);
         }
     }
 }

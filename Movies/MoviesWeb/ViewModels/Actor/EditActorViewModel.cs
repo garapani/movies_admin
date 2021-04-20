@@ -30,13 +30,7 @@ namespace MoviesWeb.ViewModels.Actor
         [Display(Name = "Description", Prompt = "Enter description")]
         public string Description { get; set; }
 
-        [HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime UpdatedAt { get; set; }
-
-        [HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime CreatedAt { get; set; }
+        public string Gender { get; set; }
     }
 
 }

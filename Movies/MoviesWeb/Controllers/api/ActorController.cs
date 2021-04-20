@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using ApplicationCore.Features.ActorFeatures.Queries;
+using ApplicationCore.Paging;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +23,18 @@ namespace MoviesWeb.Controllers.api
         }
 
         [HttpGet]
-        public async Task<PaginatedList<ActorViewModel>> GetActorsAsync([FromQuery] QueryParams searchQueryParams)
+        public async Task<PaginatedList<ActorViewModel>> GetActorsAsync(string prefix)
         {
-            var actors = await _mediator.Send(new GetPaginatedActorsQuery(searchQueryParams.SearchString, searchQueryParams.PageNumber ?? 0, searchQueryParams.ItemsPerPage ?? Constants.ITEMS_PER_PAGE));
-            return _mapper.Map<PagingList<ActorViewModel>>(actors);
+            try
+            {
+                var actors = await _mediator.Send(new GetPaginatedActorsQuery(prefix, 1, Constants.ITEMS_PER_PAGE));
+                var temp = _mapper.Map<PaginatedList<ActorViewModel>>(actors);
+                return temp;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

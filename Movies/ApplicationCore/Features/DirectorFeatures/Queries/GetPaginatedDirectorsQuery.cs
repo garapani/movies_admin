@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using ApplicationCore.Interfaces.Repositories;
 using Domain.Entity;
 using MediatR;
-using ReflectionIT.Mvc.Paging;
+using ApplicationCore.Paging;
 
 namespace ApplicationCore.Features.DirectorFeatures.Queries
 {
-    public class GetPaginatedDirectorsQuery : IRequest<PagingList<Director>>
+    public class GetPaginatedDirectorsQuery : IRequest<PaginatedList<Director>>
     {
         public GetPaginatedDirectorsQuery(string searchString, int pageIndex, int pageSize)
         {
@@ -21,7 +21,7 @@ namespace ApplicationCore.Features.DirectorFeatures.Queries
         public int PageSize { get; set; }
     }
 
-    public class GetPaginatedDirectorsQueryHandle : IRequestHandler<GetPaginatedDirectorsQuery, PagingList<Director>>
+    public class GetPaginatedDirectorsQueryHandle : IRequestHandler<GetPaginatedDirectorsQuery, PaginatedList<Director>>
     {
         private readonly IAsyncRepository<Director> _repositoryAsync;
 
@@ -30,7 +30,7 @@ namespace ApplicationCore.Features.DirectorFeatures.Queries
             _repositoryAsync = repositoryAsync;
         }
 
-        public async Task<PagingList<Director>> Handle(GetPaginatedDirectorsQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedList<Director>> Handle(GetPaginatedDirectorsQuery request, CancellationToken cancellationToken)
         {
             return null;
             //return await _repositoryAsync.PaginatedListAsync(new GetPaginatedDirectorsWithItemsSpecfication(request.SearchString, request.PageIndex, request.PageSize));

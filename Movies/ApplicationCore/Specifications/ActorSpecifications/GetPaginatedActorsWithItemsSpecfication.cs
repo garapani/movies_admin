@@ -9,7 +9,8 @@ namespace ApplicationCore.Specifications.ActorSpecifications
         {
             if (!string.IsNullOrEmpty(searchString))
                 Query.Where(a => a.Name.ToLower().Contains(searchString.ToLower()));
-            Query.Skip((pageIndex - 1) * pageSize);
+            if(pageIndex > 0 )
+                Query.Skip((pageIndex - 1) * pageSize);
             Query.Take(pageSize);
             Query.Include(a => a.Image);
             Query.Include(a => a.MovieActors);

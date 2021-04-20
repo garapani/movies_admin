@@ -1,10 +1,14 @@
+using System.Reflection;
 using ApplicationCore;
-using AutoMapper;
+using ApplicationCore.Interfaces.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MoviesWeb.MapperProfiles;
+using MoviesWeb.Services;
 using Persistence;
 
 namespace MoviesWeb
@@ -36,7 +40,9 @@ namespace MoviesWeb
         {
             services.AddPersistance(Configuration);
             services.AddApplicationCore();
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
@@ -57,7 +63,7 @@ namespace MoviesWeb
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();

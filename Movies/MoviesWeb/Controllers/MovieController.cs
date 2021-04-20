@@ -2,16 +2,16 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using ApplicationCore.Features.MovieFeatures.Queries;
 using ApplicationCore.Features.MovieFeatures.Commands;
+using ApplicationCore.Features.MovieFeatures.Queries;
 using ApplicationCore.Paging;
+using AutoMapper;
+using Domain.Entity;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MoviesWeb.Utils;
 using MoviesWeb.ViewModels.Movie;
-using AutoMapper;
-using MediatR;
-using Domain.Entity;
 
 namespace MoviesWeb.Controllers
 {
@@ -30,15 +30,14 @@ namespace MoviesWeb.Controllers
         public async Task<ActionResult> Index([FromQuery] QueryParams searchQueryParams)
         {
             string searchString = string.Empty;
-            int pageIndex = 0;
+            int pageIndex = 1;
             int itemsPerPage = Constants.ITEMS_PER_PAGE;
             if (searchQueryParams != null)
             {
-                int.TryParse(searchQueryParams.PageId, out pageIndex);
                 searchString = searchQueryParams.SearchString;
-                itemsPerPage = Constants.ITEMS_PER_PAGE;
+                pageIndex = searchQueryParams.PageNumber;
+                itemsPerPage = searchQueryParams.ItemsPerPage ?? itemsPerPage;
             }
-
             var paginatedMovies = await _mediator.Send(new GetPaginatedMoviesQuery(searchString, pageIndex, itemsPerPage));
 
             var movieIndexViewModel = new MovieIndexViewModel

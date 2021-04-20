@@ -7,9 +7,15 @@
   <ItemGroup>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="5.0.3" />
-    <PackageReference Include="ReflectionIT.Mvc.Paging" Version="5.1.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Common\Models\" />
+    <Folder Include="Features\MovieActorFeature\" />
+    <Folder Include="Features\MovieActorFeature\Commands\" />
+    <Folder Include="Features\MovieActorFeature\Queries\" />
   </ItemGroup>
 </Project>
