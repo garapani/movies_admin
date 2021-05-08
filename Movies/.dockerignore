@@ -21,5 +21,8 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
-LICENSE
-README.md
+**/.jpg
+**/.jpeg
+**/.png
+**/.sqlite
+**/.mdf

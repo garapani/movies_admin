@@ -1,20 +1,21 @@
-﻿using System;
+﻿using ApplicationCore.Common.Models;
+using ApplicationCore.Features.DirectorFeatures.Commands;
+using ApplicationCore.Features.DirectorFeatures.Queries;
+using AutoMapper;
+using Domain.Entity;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MoviesWeb.Utils;
+using MoviesWeb.ViewModels.Director;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using ApplicationCore.Features.DirectorFeatures.Queries;
-using ApplicationCore.Features.DirectorFeatures.Commands;
-using AutoMapper;
-using Domain.Entity;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using MoviesWeb.Utils;
-using MoviesWeb.ViewModels.Director;
-using ApplicationCore.Paging;
 
 namespace MoviesWeb.Controllers
 {
+    [Authorize]
     public class DirectorController : Controller
     {
         private readonly IMediator _mediator;
@@ -35,7 +36,7 @@ namespace MoviesWeb.Controllers
             {
                 searchString = queryParams.SearchString;
                 pageIndex = queryParams.PageNumber;
-                itemsPerPage = queryParams.ItemsPerPage ?? 0;
+                itemsPerPage = queryParams.ItemsPerPage ?? itemsPerPage;
             }
             var paginatedDirectors = await _mediator.Send(new GetPaginatedDirectorsQuery(searchString, pageIndex, itemsPerPage));
 
@@ -121,6 +122,7 @@ namespace MoviesWeb.Controllers
             {
                 if (directorViewModel.Photo != null)
                 {
+                    FileUtil.DeleteFile(directorViewModel.ImageUrl);
                     var newFilePath = FileUtil.SaveFileToPhysicalLocation(directorViewModel.Name, directorViewModel.Photo);
                     directorViewModel.ImageUrl = Path.Combine("Images", newFilePath);
                 }

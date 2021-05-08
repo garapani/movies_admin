@@ -1,19 +1,21 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ApplicationCore.Common.Models;
 using ApplicationCore.Features.ActorFeatures.Commands;
 using ApplicationCore.Features.ActorFeatures.Queries;
-using ApplicationCore.Paging;
 using AutoMapper;
 using Domain.Entity;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MoviesWeb.Utils;
 using MoviesWeb.ViewModels.Actor;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MoviesWeb.Controllers
 {
+    [Authorize]
     public class ActorController : Controller
     {
         private readonly IMediator _mediator;
@@ -116,6 +118,7 @@ namespace MoviesWeb.Controllers
             {
                 if (actorViewModel.Photo != null)
                 {
+                    FileUtil.DeleteFile(actorViewModel.ImageUrl);
                     var newFilePath = FileUtil.SaveFileToPhysicalLocation(actorViewModel.Name, actorViewModel.Photo);
                     actorViewModel.ImageUrl = Path.Combine("Images", newFilePath);
                 }

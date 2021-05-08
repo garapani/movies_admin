@@ -1,5 +1,5 @@
 ﻿using System;
-using ApplicationCore.Interfaces.Repositories;
+using ApplicationCore.Common.Interfaces.Repositories;
 using System.Threading.Tasks;
 using System.Threading;
 using Domain.Entity;

@@ -1,16 +1,18 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using ApplicationCore.Common.Models;
 using ApplicationCore.Features.ActorFeatures.Queries;
-using ApplicationCore.Paging;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MoviesWeb.ViewModels.Actor;
+using System;
+using System.Threading.Tasks;
 
 namespace MoviesWeb.Controllers.api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ActorController : ControllerBase
     {
         private readonly IMediator _mediator;

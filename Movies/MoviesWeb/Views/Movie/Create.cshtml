@@ -33,16 +33,17 @@
                         <span asp-validation-for="ReleaseDate" class="text-danger"></span>
                     </div>
                     @*<div class="form-group row">
-                        <label asp-for="Tagline" class="control-label col-2"></label>
-                        <input asp-for="Tagline" class="form-control col-10" />
-                        <span asp-validation-for="Tagline" class="text-danger"></span>
-                    </div>*@
+                            <label asp-for="Tagline" class="control-label col-2"></label>
+                            <input asp-for="Tagline" class="form-control col-10" />
+                            <span asp-validation-for="Tagline" class="text-danger"></span>
+                        </div>*@
                     <div class="form-group row">
                         <label asp-for="Photo" class="control-label col-2"></label>
                         <input asp-for="Photo" type="file" id="uploadedPhoto" class="form-control col-10" />
                         <span asp-validation-for="Photo" class="text-danger"></span>
                         <img id="previewImage" alt="Image" style="height:50px; width:50px; display:none" />
                     </div>
+                   
                     <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-primary" />
                     </div>

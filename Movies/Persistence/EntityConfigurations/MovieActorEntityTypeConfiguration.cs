@@ -14,13 +14,13 @@ namespace Persistence.EntityConfigurations
             movieActorEntityTypeBuilder.HasOne(ma => ma.Movie)
                 .WithMany(m => m.MovieActors)
                 .HasForeignKey(ma => ma.MovieId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_MovieActor_Movies");
 
             movieActorEntityTypeBuilder.HasOne(ma => ma.Actor)
                 .WithMany(a => a.MovieActors)
                 .HasForeignKey(ma => ma.ActorId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_MovieActor_Actors");
         }
     }

@@ -1,5 +1,5 @@
 ﻿using System;
-using ApplicationCore.Interfaces.Services;
+using ApplicationCore.Common.Interfaces.Services;
 
 namespace Persistence.Services
 {

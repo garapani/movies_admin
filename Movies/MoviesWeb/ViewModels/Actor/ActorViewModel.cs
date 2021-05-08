@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MoviesWeb.CustomAttributes.Validation;
+using MoviesWeb.ViewModels.Movie;
+using MoviesWeb.ViewModels.MovieActor;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MoviesWeb.ViewModels.Actor
@@ -22,11 +25,11 @@ namespace MoviesWeb.ViewModels.Actor
         [DataType(DataType.Upload)]
         [MaxFileSize(5 * 1024 * 1024)]
         [Display(Name = "Upload actor image")]
-        [AllowedExtensions(new string[] { ".jpg",".jpeg", ".png", ".jfif" })]
+        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".jfif" })]
         public IFormFile Photo { get; set; }
 
         [Required]
-        [Display(Name ="Description", Prompt = "Enter description")]
+        [Display(Name = "Description", Prompt = "Enter description")]
         public string Description { get; set; }
 
         [Display(Name = "Created Time")]
@@ -44,5 +47,6 @@ namespace MoviesWeb.ViewModels.Actor
 
         public string Gender { get; set; }
 
+        public IEnumerable<MovieActorViewModel> MovieActors { get; set; }
     }
 }

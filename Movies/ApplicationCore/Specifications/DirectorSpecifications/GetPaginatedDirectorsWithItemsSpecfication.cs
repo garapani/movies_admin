@@ -12,7 +12,8 @@ namespace ApplicationCore.Specifications.DirectorSpecifications
                 Query.Where(d => d.Name.ToLower().Contains(searchString.ToLower()));
             Query.Include(d => d.Image);
             Query.Include(d => d.MovieDirectors);
-            Query.Skip((pageIndex - 1) * pageSize);
+            if (pageIndex > 0)
+                Query.Skip((pageIndex - 1) * pageSize);
             Query.Take(pageSize);
         }
     }

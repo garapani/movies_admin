@@ -1,4 +1,4 @@
-﻿using ApplicationCore.Paging;
+﻿using ApplicationCore.Common.Models;
 using AutoMapper;
 using Domain.Entity;
 using MoviesWeb.ViewModels.Crew;

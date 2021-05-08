@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using ApplicationCore.Common.Models;
 using ApplicationCore.Features.ActorFeatures.Queries;
-using ApplicationCore.Paging;
 using AutoMapper;
 using Domain.Entity;
 using MediatR;
 using Moq;
 using MoviesWeb.MapperProfiles;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Movies.Web.Test

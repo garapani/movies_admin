@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ApplicationCore.Common.Models;
+using ApplicationCore.Common.Interfaces.Repositories;
 using Ardalis.Specification;
 using Ardalis.Specification.EntityFrameworkCore;
 using Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
-using ApplicationCore.Interfaces.Repositories;
-using ApplicationCore.Paging;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Persistence.Data
 {

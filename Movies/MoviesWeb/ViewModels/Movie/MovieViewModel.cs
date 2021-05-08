@@ -25,7 +25,7 @@ namespace MoviesWeb.ViewModels.Movie
         public string Overview { get; set; }
 
         [Display(Name = "Release Date", Prompt = "Enter release date")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime? ReleaseDate { get; set; }
 
         [Display(Name = "Run time", Prompt = "Enter run time")]

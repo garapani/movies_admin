@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using ApplicationCore.Interfaces.Services;
+using ApplicationCore.Common.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 
 namespace MoviesWeb.Services

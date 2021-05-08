@@ -2,7 +2,7 @@
 using Domain.Entity;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationCore.Interfaces.Repositories;
+using ApplicationCore.Common.Interfaces.Repositories;
 using MediatR;
 
 namespace ApplicationCore.Features.DirectorFeatures.Commands

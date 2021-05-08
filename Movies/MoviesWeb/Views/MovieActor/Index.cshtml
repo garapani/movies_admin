@@ -18,7 +18,7 @@
             </div>
             <div class="col-9">
                 <h3>Movie: @Model.Movie.Title</h3>
-                <h3>Release date: @Model.Movie.ReleaseDate</h3>
+                <h3>Release date: @Model.Movie.ReleaseDate?.ToShortDateString()</h3>
             </div>
         </div>
         <hr />
@@ -50,29 +50,42 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.MovieActors.FirstOrDefault().CharacterName)
                             </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MovieActors.FirstOrDefault().LastModifiedAt)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MovieActors.FirstOrDefault().LastModifiedBy)
+                            </th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.MovieActors)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Actor.Name)
-                                </td>
-                                <td>
-                                    <img src="~/@item.Actor.ImageUrl" height="50" width="50" alt="image" asp-append-version="true" />
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CastOrder)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CharacterName)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-actorId="@item.ActorId" asp-route-movieId="@item.MovieId">Edit</a>
-                                    <a asp-action="Delete" asp-route-actorId="@item.ActorId" asp-route-movieId="@item.MovieId">Delete</a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Actor.Name)
+                            </td>
+                            <td>
+                                <img src="~/@item.Actor.ImageUrl" height="50" width="50" alt="image" asp-append-version="true" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CastOrder)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CharacterName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastModifiedAt)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastModifiedBy)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-actorId="@item.ActorId" asp-route-movieId="@item.MovieId">Edit</a> |
+                                <a asp-action="Delete" asp-route-actorId="@item.ActorId" asp-route-movieId="@item.MovieId">Delete</a>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

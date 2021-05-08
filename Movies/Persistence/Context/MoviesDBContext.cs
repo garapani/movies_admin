@@ -1,29 +1,24 @@
-﻿using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
-using ApplicationCore.Interfaces.Repositories;
-using ApplicationCore.Interfaces.Services;
+﻿using ApplicationCore.Common.Interfaces.Repositories;
+using ApplicationCore.Common.Interfaces.Services;
 using Domain.Common;
 using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using Persistence.EntityConfigurations;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Persistence.Context
 {
-    public class MoviesDBContext : DbContext, IApplicationDbContext
+    public class MoviesDBContext : DbContext, IMoviesDbContext
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTime _dateTime;
         private readonly IDomainEventService _domainEventService;
 
-        //public MoviesDBContext(DbContextOptions<MoviesDBContext> options)
-        //    : base(options)
-        //{
-        //}
-
         public MoviesDBContext(
-            DbContextOptions options,
+            DbContextOptions<MoviesDBContext> options,
             ICurrentUserService currentUserService,
             IDomainEventService domainEventService,
             IDateTime dateTime) : base(options)
@@ -32,11 +27,6 @@ namespace Persistence.Context
             _domainEventService = domainEventService;
             _dateTime = dateTime;
         }
-
-
-        //public MoviesDBContext() : base()
-        //{
-        //}
 
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Actor> Actors { get; set; }
@@ -70,9 +60,7 @@ namespace Persistence.Context
             }
 
             var result = await base.SaveChangesAsync(cancellationToken);
-
-            //venkat
-            //await DispatchEvents();
+            await DispatchEvents();
 
             return result;
         }

@@ -1,11 +1,11 @@
-using System.Collections.Generic;
-using System.Linq;
-using ApplicationCore.Paging;
+using ApplicationCore.Common.Models;
 using AutoMapper;
 using Domain.Entity;
 using FizzWare.NBuilder;
 using MoviesWeb.MapperProfiles;
 using MoviesWeb.ViewModels.Actor;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace Movies.Web.Test
@@ -55,11 +55,12 @@ namespace Movies.Web.Test
             var configuration = new MapperConfiguration(cfg => cfg.AddProfiles(profiles));
             Mapper mapper = new Mapper(configuration);
             var actor = Builder<Actor>.CreateNew().Build();
+            actor.Image = new Image("temp");
             var actorViewModel = mapper.Map<Actor, ActorViewModel>(actor);
-            var list = Builder<Actor>.CreateListOfSize(10).Build().ToList();
-            //var temp = new PaginatedList<Actor>(list.ToList(), 10, 1, 2);
-            //var viewModels = mapper.Map<PaginatedList<Actor>, PaginatedList<ActorViewModel>>(temp);
+            var list = Builder<Actor>.CreateListOfSize(10).Build().ToList();           
             var temp1 = mapper.Map<List<Actor>, List<ActorViewModel>>(list);
+            var temp2 = new PaginatedList<Actor>(list.ToList(), 10, 1, 2);
+            var viewModels = mapper.Map<PaginatedList<Actor>, PaginatedList<ActorViewModel>>(temp2);
         }
     }
 }

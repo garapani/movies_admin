@@ -1,6 +1,6 @@
 ﻿using System;
 using Domain.Entity;
-using ApplicationCore.Interfaces.Repositories;
+using ApplicationCore.Common.Interfaces.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

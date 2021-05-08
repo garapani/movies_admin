@@ -11,11 +11,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\" />
-    <Folder Include="Common\Models\" />
-    <Folder Include="Features\MovieActorFeature\" />
-    <Folder Include="Features\MovieActorFeature\Commands\" />
-    <Folder Include="Features\MovieActorFeature\Queries\" />
-  </ItemGroup>
 </Project>

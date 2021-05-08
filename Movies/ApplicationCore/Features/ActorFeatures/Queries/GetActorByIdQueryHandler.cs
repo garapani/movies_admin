@@ -1,8 +1,9 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using ApplicationCore.Interfaces.Repositories;
+﻿using ApplicationCore.Common.Interfaces.Repositories;
+using ApplicationCore.Specifications.ActorSpecifications;
 using Domain.Entity;
 using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ApplicationCore.Features.ActorFeatures.Queries
 {
@@ -16,7 +17,7 @@ namespace ApplicationCore.Features.ActorFeatures.Queries
 
         public async Task<Actor> Handle(GetActorByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _asyncRepository.GetByIdAsync(request.Id);
+            return await _asyncRepository.FirstOrDefaultAsync(new GetActorWithItemsSpecification(request.Id));
         }
     }
 }

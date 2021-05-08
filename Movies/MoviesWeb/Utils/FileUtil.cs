@@ -31,5 +31,25 @@ namespace MoviesWeb.Utils
 
             return newFileName;
         }
+
+        public static bool DeleteFile(string relativeFilePath)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(relativeFilePath))
+                {
+                    var actualPath = Path.Combine(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")).Root, relativeFilePath);
+                    if (File.Exists(actualPath))
+                    {
+                        File.Delete(actualPath);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

@@ -1,0 +1,14 @@
+﻿@model IList<MoviesWeb.ViewModels.MovieActor.MovieActorViewModel>
+@{
+    if (Model == null || Model.Count == 0)
+    {
+        <p>Movies are not available</p>
+    }
+    else
+    {
+        foreach (var movieActor in Model)
+        {
+            <a asp-controller="Movie" asp-action="Details" asp-route-id="@movieActor.MovieId">@movieActor.Movie.Title</a>
+        }
+    }
+}

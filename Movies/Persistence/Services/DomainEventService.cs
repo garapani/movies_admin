@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using ApplicationCore.Common.Models;
-using ApplicationCore.Interfaces.Services;
+using ApplicationCore.Common.Interfaces.Services;
 using Domain.Common;
 using MediatR;
 using Microsoft.Extensions.Logging;

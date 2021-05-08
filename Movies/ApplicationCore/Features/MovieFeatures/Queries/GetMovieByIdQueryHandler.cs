@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using ApplicationCore.Interfaces.Repositories;
+using ApplicationCore.Common.Interfaces.Repositories;
+using ApplicationCore.Specifications.MovieSpecifications;
 using Domain.Entity;
 using MediatR;
 
@@ -16,7 +17,8 @@ namespace ApplicationCore.Features.MovieFeatures.Queries
 
         public async Task<Movie> Handle(GetMovieByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _asyncRepository.GetByIdAsync(request.Id);
+
+            return await _asyncRepository.FirstOrDefaultAsync(new GetMovieWithItemsSpecification(request.Id));
         }
     }
 }

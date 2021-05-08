@@ -3,7 +3,7 @@ using MediatR;
 using Domain.Entity;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationCore.Interfaces.Repositories;
+using ApplicationCore.Common.Interfaces.Repositories;
 
 namespace ApplicationCore.Features.DirectorFeatures.Commands
 {

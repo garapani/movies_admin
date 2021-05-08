@@ -56,7 +56,7 @@
                 @Html.DisplayNameFor(model => model.MovieActors) 
             </dt>
             <dd class="col-10">
-                @await Html.PartialAsync("../Shared/_CastInSingleLine", Model.MovieActors)
+                @await Html.PartialAsync("../Shared/_ActorsInSingleLinePartial", Model.MovieActors)
             </dd>
             <dt class="col-2">
                 @Html.DisplayNameFor(model => model.CreatedAt)

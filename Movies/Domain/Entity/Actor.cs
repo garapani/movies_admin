@@ -15,7 +15,7 @@ namespace Domain.Entity
         public virtual string Name { get; set; }
         public virtual Image Image { get; set; }
         public virtual string Description { get; set; }
-        public virtual Gender Gender { get; set;}
+        public virtual Gender Gender { get; set; }
         public virtual ICollection<MovieActor> MovieActors { get; set; }
     }
 }

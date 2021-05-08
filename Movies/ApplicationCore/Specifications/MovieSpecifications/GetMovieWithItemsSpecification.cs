@@ -12,6 +12,7 @@ namespace ApplicationCore.Specifications.MovieSpecifications
             Query.Include(m => m.Video);
             Query.Include(m => m.MovieActors).ThenInclude(mc => mc.Actor);
             Query.Include(m => m.MovieCrew).ThenInclude(mc => mc.Crew);
+            Query.Include(m => m.MovieDirectors).ThenInclude(mc => mc.Director);
         }
     }
 }

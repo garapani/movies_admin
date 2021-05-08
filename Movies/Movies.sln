@@ -9,17 +9,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{4FDAE584-1C93-4D05-BA66-FA0FEB534A75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{3813D297-E3D8-41FA-9FC1-E13B64AE84B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{3813D297-E3D8-41FA-9FC1-E13B64AE84B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesWeb", "MoviesWeb\MoviesWeb.csproj", "{A81909F7-5DE8-40E0-A990-F5E2E2B2AB3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesWeb", "MoviesWeb\MoviesWeb.csproj", "{A81909F7-5DE8-40E0-A990-F5E2E2B2AB3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationCore", "ApplicationCore\ApplicationCore.csproj", "{E04A9A38-3230-4637-8771-D8E941028100}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationCore", "ApplicationCore\ApplicationCore.csproj", "{E04A9A38-3230-4637-8771-D8E941028100}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{A56CBF20-A869-4933-9CEC-765402AA5875}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{A56CBF20-A869-4933-9CEC-765402AA5875}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{75AE686B-80D1-4070-BA74-F7A39B04E59F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Web.Test", "Movies.Web.Test\Movies.Web.Test.csproj", "{F22E58C7-CEDE-4EC0-B45C-C738B0244471}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.Web.Test", "Movies.Web.Test\Movies.Web.Test.csproj", "{F22E58C7-CEDE-4EC0-B45C-C738B0244471}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
