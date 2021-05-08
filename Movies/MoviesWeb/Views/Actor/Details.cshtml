@@ -30,16 +30,22 @@
                 @Html.DisplayFor(model => model.Description)
             </dd>
             <dt class="col-2">
+                @Html.DisplayNameFor(model => model.MovieActors)
+            </dt>
+            <dd class="col-10">
+                @await Html.PartialAsync("../Shared/_MoviesInSingleLinePartial", Model.MovieActors)
+            </dd>
+            <dt class="col-2">
+                @Html.DisplayNameFor(model => model.LastModifiedAt)
+            </dt>
+            <dd class="col-10">
+                @Html.DisplayFor(model => model.LastModifiedAt)
+            </dd>
+            <dt class="col-2">
                 @Html.DisplayNameFor(model => model.CreatedAt)
             </dt>
             <dd class="col-10">
                 @Html.DisplayFor(model => model.CreatedAt)
-            </dd>
-            <dt class="col-2">
-                @Html.DisplayNameFor(model => model.UpdatedAt)
-            </dt>
-            <dd class="col-10">
-                @Html.DisplayFor(model => model.UpdatedAt)
             </dd>
         </dl>
     </div>

@@ -1,11 +1,20 @@
-﻿using Domain.Common;
+﻿using System.Collections.Generic;
+using Domain.Common;
 namespace Domain.Entity
 {
-    public class Keyword: BaseEntity, IAggregateRoot
+    public class Keyword: ValueObject<Keyword>
     {
-        public Keyword()
+        public string Name { get; }
+
+        private Keyword() { }
+        public Keyword(string name)
         {
+            Name = name;
         }
-        public string Name { get; set; }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Name;
+        }
     }
 }

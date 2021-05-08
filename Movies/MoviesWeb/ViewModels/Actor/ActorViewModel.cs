@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MoviesWeb.CustomAttributes.Validation;
+using MoviesWeb.ViewModels.Movie;
+using MoviesWeb.ViewModels.MovieActor;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MoviesWeb.ViewModels.Actor
@@ -22,19 +25,28 @@ namespace MoviesWeb.ViewModels.Actor
         [DataType(DataType.Upload)]
         [MaxFileSize(5 * 1024 * 1024)]
         [Display(Name = "Upload actor image")]
-        [AllowedExtensions(new string[] { ".jpg", ".png", ".jfif" })]
+        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".jfif" })]
         public IFormFile Photo { get; set; }
 
         [Required]
-        [Display(Name ="Description", Prompt = "Enter description")]
+        [Display(Name = "Description", Prompt = "Enter description")]
         public string Description { get; set; }
 
-        //[HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTimeOffset UpdatedAt { get; set; }
+        [Display(Name = "Created Time")]
+        public DateTime CreatedAt { get; set; }
 
-        //[HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTimeOffset CreatedAt { get; set; }
+        [Display(Name = "Created By")]
+        public string CreatedBy { get; set; }
+
+
+        [Display(Name = "Last Modified Time")]
+        public DateTime LastModifiedAt { get; set; }
+
+        [Display(Name = "Last Modified By")]
+        public string LastModifiedBy { get; set; }
+
+        public string Gender { get; set; }
+
+        public IEnumerable<MovieActorViewModel> MovieActors { get; set; }
     }
 }

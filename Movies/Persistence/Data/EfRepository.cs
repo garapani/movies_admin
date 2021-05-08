@@ -1,18 +1,17 @@
-﻿using ApplicationCore.Interfaces.Repositories;
-using ApplicationCore.Paging;
-using ApplicationCore.Specifications;
+﻿using ApplicationCore.Common.Models;
+using ApplicationCore.Common.Interfaces.Repositories;
 using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
 using Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Persistence.Data
 {
-    public class EfRepository<TEntity> : IAsyncRepository<TEntity> where TEntity : BaseEntity, IAggregateRoot
+    public class EfRepository<TEntity> : IAsyncRepository<TEntity> where TEntity : AuditableEntity, IAggregateRoot
     {
         protected readonly MoviesDBContext _dbContext;
 
@@ -29,6 +28,12 @@ namespace Persistence.Data
         public async Task<IReadOnlyList<TEntity>> ListAllAsync()
         {
             return await _dbContext.Set<TEntity>().ToListAsync();
+        }
+
+        public async Task<PaginatedList<TEntity>> ListAsync(ISpecification<TEntity> spec, PagingInfo pagingInfo)
+        {
+            var specificationResult = ApplySpecification(spec);
+            return await PaginatedList<TEntity>.CreateAsync(specificationResult, pagingInfo.PageIndex, pagingInfo.PageSize);
         }
 
         public async Task<IReadOnlyList<TEntity>> ListAsync(ISpecification<TEntity> spec)
@@ -51,8 +56,6 @@ namespace Persistence.Data
 
         public async Task<TEntity> AddAsync(TEntity entity)
         {
-            entity.CreatedAt = DateTime.Now;
-            entity.UpdatedAt = DateTime.Now;
             await _dbContext.Set<TEntity>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
@@ -61,7 +64,6 @@ namespace Persistence.Data
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            entity.UpdatedAt = DateTime.Now;
             _dbContext.Set<TEntity>().Update(entity);
             await _dbContext.SaveChangesAsync();
             return entity;
@@ -88,7 +90,8 @@ namespace Persistence.Data
 
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> spec)
         {
-            return new EfSpecificationEvaluator<TEntity>().GetQuery(_dbContext.Set<TEntity>().AsQueryable(), spec);
+            var evaluator = new SpecificationEvaluator();
+            return evaluator.GetQuery(_dbContext.Set<TEntity>().AsQueryable(), spec);
         }
     }
 }

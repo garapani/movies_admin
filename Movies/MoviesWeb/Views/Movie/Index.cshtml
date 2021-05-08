@@ -43,8 +43,9 @@
                         @Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Movies[0].UpdatedAt)
+                        @Html.DisplayNameFor(model => model.Movies[0].LastModifiedAt)
                     </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -67,10 +68,11 @@
                             @Html.DisplayFor(modelItem => item.ReleaseDate)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.UpdatedAt)
+                            @Html.DisplayFor(modelItem => item.LastModifiedAt)
                         </td>
                         <td>
-                            <a asp-controller="Cast" asp-action="Index" asp-route-movieId="@item.Id">Add Edit Cast</a> |
+                            <a asp-controller="MovieActor" asp-action="Index" asp-route-movieId="@item.Id">Add Edit Cast</a> |
+                            <a asp-controller="MovieDirector" asp-action="Index" asp-route-movieId="@item.Id">Add Edit Director</a> |
                             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                             <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                             <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>

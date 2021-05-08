@@ -79,3 +79,17 @@ input.input-validation-error {
     background-color: #0275d8;
     border-color: #0275d8;
 }
+
+table.table td {
+    padding: 3px;
+    vertical-align:middle;
+    text-align:center;
+}
+
+table.table th {
+    background-color: #e8eef4;
+    border: 1px solid #c3c3c3;
+    height:50px;
+    vertical-align: middle;
+    text-align:center;
+}

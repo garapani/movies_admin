@@ -34,7 +34,10 @@
                         @Html.DisplayNameFor(model => model.Directors[0].Description)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Directors[0].UpdatedAt)
+                        @Html.DisplayNameFor(model => model.Directors[0].LastModifiedAt)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Directors[0].LastModifiedBy)
                     </th>
                     <th></th>
                 </tr>
@@ -42,25 +45,28 @@
             <tbody>
                 @foreach (var item in Model.Directors)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            <img src="~/@item.ImageUrl" height="50" width="50" alt="image" asp-append-version="true" />
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UpdatedAt)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <img src="~/@item.ImageUrl" height="50" width="50" alt="image" asp-append-version="true" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastModifiedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastModifiedBy)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

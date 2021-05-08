@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MoviesWeb.Controllers
 {
+    [Authorize]
     public class DepartmentController : Controller
     {
         private readonly IMediator _mediator;

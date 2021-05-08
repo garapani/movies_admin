@@ -15,8 +15,8 @@ namespace MoviesWeb.ViewModels.Actor
         [Display(Name = "Actor Name", Prompt = "Enter Actor name")]
         public string Name { get; set; }
 
-        [Display(Name="Image")]
-        public string ImageId { get; set; }
+        //[Display(Name="Image")]
+        //public string ImageId { get; set; }
         [Display(Name = "Image")]
         public string ImageUrl { get; set; }
 
@@ -30,13 +30,7 @@ namespace MoviesWeb.ViewModels.Actor
         [Display(Name = "Description", Prompt = "Enter description")]
         public string Description { get; set; }
 
-        [HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime UpdatedAt { get; set; }
-
-        [HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime CreatedAt { get; set; }
+        public string Gender { get; set; }
     }
 
 }

@@ -3,17 +3,19 @@ using System.Collections.Generic;
 
 namespace Domain.Entity
 {
-    public class Actor : BaseEntity, IAggregateRoot
+    public class Actor : AuditableEntity, IAggregateRoot
     {
         public Actor()
         {
-            Movies = new HashSet<MovieCast>();
+            MovieActors = new HashSet<MovieActor>();
         }
-        
-        public string Name { get; set; }
-        public int ImageId { get; set; }
+
+        public virtual int ActorId { get; set; }
+
+        public virtual string Name { get; set; }
         public virtual Image Image { get; set; }
-        public string Description { get; set; }
-        public virtual ICollection<MovieCast> Movies { get; set; }
+        public virtual string Description { get; set; }
+        public virtual Gender Gender { get; set; }
+        public virtual ICollection<MovieActor> MovieActors { get; set; }
     }
 }

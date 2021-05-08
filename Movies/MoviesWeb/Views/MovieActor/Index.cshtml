@@ -1,0 +1,95 @@
+﻿@model MoviesWeb.ViewModels.MovieActor.MovieActorIndexViewModel
+
+@{
+    ViewData["Title"] = "Movie cast details";
+}
+
+@*<p>
+        <a asp-action="Create" asp-route-movieId="@Model.FirstOrDefault().MovieId">Add cast</a>
+    </p>*@
+
+<div class="container row">
+    <div class="col-12 row">
+        <h3>Cast</h3>
+        <hr />
+        <div class="movieDetails col-12 row">
+            <div class="col-3">
+                <img src="~/@Model.Movie.ImageUrl" height="100" width="100" alt="image" asp-append-version="true" />
+            </div>
+            <div class="col-9">
+                <h3>Movie: @Model.Movie.Title</h3>
+                <h3>Release date: @Model.Movie.ReleaseDate?.ToShortDateString()</h3>
+            </div>
+        </div>
+        <hr />
+        <div class="col-12 row m-1">
+            <a type="button" class="float-right" asp-action="Create" asp-route-movieId="@Model.Movie.Id">Add Actors</a>
+        </div>
+        <hr />
+        @if (Model == null || Model.MovieActors == null || Model.MovieActors.Count() == 0)
+        {
+            <div class="col-12 row">
+                <h3>Cast details are not present</h3>
+            </div>
+        }
+        else
+        {
+            <div class="actorDetails col-12">
+                <table class="table table-sm table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MovieActors.FirstOrDefault().Actor.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MovieActors.FirstOrDefault().Actor.ImageUrl)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MovieActors.FirstOrDefault().CastOrder)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MovieActors.FirstOrDefault().CharacterName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MovieActors.FirstOrDefault().LastModifiedAt)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MovieActors.FirstOrDefault().LastModifiedBy)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.MovieActors)
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Actor.Name)
+                            </td>
+                            <td>
+                                <img src="~/@item.Actor.ImageUrl" height="50" width="50" alt="image" asp-append-version="true" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CastOrder)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CharacterName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastModifiedAt)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastModifiedBy)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-actorId="@item.ActorId" asp-route-movieId="@item.MovieId">Edit</a> |
+                                <a asp-action="Delete" asp-route-actorId="@item.ActorId" asp-route-movieId="@item.MovieId">Delete</a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

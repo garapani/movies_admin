@@ -1,20 +1,21 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ApplicationCore.Common.Models;
 using ApplicationCore.Features.ActorFeatures.Commands;
 using ApplicationCore.Features.ActorFeatures.Queries;
-using ApplicationCore.Features.ImageFeatures.Commands;
-using ApplicationCore.Paging;
 using AutoMapper;
 using Domain.Entity;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MoviesWeb.Utils;
 using MoviesWeb.ViewModels.Actor;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MoviesWeb.Controllers
 {
+    [Authorize]
     public class ActorController : Controller
     {
         private readonly IMediator _mediator;
@@ -25,20 +26,19 @@ namespace MoviesWeb.Controllers
             _mapper = mapper;
             _mediator = mediator;
         }
+
         public async Task<ActionResult> Index([FromQuery] QueryParams searchQueryParams)
         {
             string searchString = string.Empty;
-            int pageIndex = 0;            
+            int pageIndex = 1;
             int itemsPerPage = Constants.ITEMS_PER_PAGE;
             if (searchQueryParams != null)
             {
-                int.TryParse(searchQueryParams.PageId, out pageIndex);
                 searchString = searchQueryParams.SearchString;
-                itemsPerPage = Constants.ITEMS_PER_PAGE;
+                pageIndex = searchQueryParams.PageNumber;
+                itemsPerPage = searchQueryParams.ItemsPerPage ?? itemsPerPage;
             }
-
             var paginatedActors = await _mediator.Send(new GetPaginatedActorsQuery(searchString, pageIndex, itemsPerPage));
-
             var actorIndexViewModel = new ActorIndexViewModel
             {
                 Actors = _mapper.Map<List<ActorViewModel>>(paginatedActors.AsEnumerable<Actor>()),
@@ -82,15 +82,8 @@ namespace MoviesWeb.Controllers
             if (ModelState.IsValid)
             {
                 string newFileName = FileUtil.SaveFileToPhysicalLocation(actorViewModel.Name, actorViewModel.Photo);
-                var image = new Image()
-                {
-                    ImageUrl = Path.Combine("Images", newFileName)
-                };
-
-                var updatedImage = await _mediator.Send(new CreateImageCommand(image));
+                actorViewModel.ImageUrl = Path.Combine("Images", newFileName);
                 var actor = _mapper.Map<Actor>(actorViewModel);
-                actor.Image = updatedImage;
-                actor.ImageId = updatedImage.Id;
                 var updatedActor = await _mediator.Send(new CreateActorCommand(actor));
                 return RedirectToAction(nameof(Index));
             }
@@ -125,6 +118,7 @@ namespace MoviesWeb.Controllers
             {
                 if (actorViewModel.Photo != null)
                 {
+                    FileUtil.DeleteFile(actorViewModel.ImageUrl);
                     var newFilePath = FileUtil.SaveFileToPhysicalLocation(actorViewModel.Name, actorViewModel.Photo);
                     actorViewModel.ImageUrl = Path.Combine("Images", newFilePath);
                 }

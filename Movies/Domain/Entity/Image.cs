@@ -1,11 +1,20 @@
-﻿using Domain.Common;
+﻿using System.Collections.Generic;
+using Domain.Common;
 namespace Domain.Entity
 {
-    public class Image : Common.BaseEntity, IAggregateRoot
+    public class Image : ValueObject<Image>
     {
-        public Image()
+        public string ImageUrl { get; }
+
+        private Image() { }
+        public Image(string imageUrl)
         {
+            ImageUrl = imageUrl;
         }
-        public string ImageUrl { get; set; }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return ImageUrl;
+        }
     }
 }

@@ -14,9 +14,6 @@ namespace MoviesWeb.ViewModels.Director
         [Required]
         [Display(Name = "Director Name", Prompt = "Enter Director name")]
         public string Name { get; set; }
-
-        [Display(Name = "Image")]
-        public string ImageId { get; set; }
         [Display(Name = "Image")]
         public string ImageUrl { get; set; }
 
@@ -30,12 +27,10 @@ namespace MoviesWeb.ViewModels.Director
         [Display(Name = "Description", Prompt = "Enter description")]
         public string Description { get; set; }
 
-        [HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime UpdatedAt { get; set; }
-
-        [HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name="Created At")]
         public DateTime CreatedAt { get; set; }
+
+        [Display(Name = "Last modified At")]
+        public DateTime LastModifiedAt { get; set; }
     }
 }

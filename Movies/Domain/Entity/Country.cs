@@ -1,12 +1,35 @@
-﻿namespace Domain.Entity
+﻿using System.Collections.Generic;
+
+namespace Domain.Entity
 {
-    public class Country : Common.BaseEntity
+    public class Country : Common.ValueObject<Country>
     {
-        public Country()
+        private Country()
         {
         }
 
-        public string Code { get; set; }
-        public string Name { get; set; }
+        public Country(string code, string name)
+        {
+            Code = code;
+            Name = name;
+        }
+
+        public string Code { get; }
+        public string Name { get; }
+
+        public static Country India => new Country("IN", "India");
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Code;
+        }
+
+        protected static IEnumerable<Country> SupportedCountries
+        {
+            get
+            {
+                yield return India;
+            }
+        }
     }
 }

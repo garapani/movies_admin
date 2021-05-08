@@ -1,11 +1,12 @@
 ﻿using Domain.Common;
 namespace Domain.Entity
 {
-    public class User : BaseEntity, IAggregateRoot
+    public class User : AuditableEntity, IAggregateRoot
     {
         public User()
         {
         }
+        public virtual int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }

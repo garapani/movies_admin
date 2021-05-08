@@ -29,12 +29,16 @@ namespace MoviesWeb.ViewModels.Director
         [Display(Name = "Description", Prompt = "Enter description")]
         public string Description { get; set; }
 
-        //[HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime UpdatedAt { get; set; }
+        [Display(Name = "Last Modified at")]
+        public DateTime LastModifiedAt { get; set; }
 
-        //[HiddenInput(DisplayValue = false)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Created at")]
         public DateTime CreatedAt { get; set; }
+
+        [Display(Name = "Last Modified by")]
+        public string LastModifiedBy { get; set; }
+
+        [Display(Name = "Created by")]
+        public string CreatedBy { get; set; }
     }
 }

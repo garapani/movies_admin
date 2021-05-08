@@ -22,7 +22,7 @@ namespace MoviesWeb.Utils
             var newFileName = String.Concat(myUniqueFileName, fileExtension);
 
             // Combines two strings into a path.
-            var filepath = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images")).Root + $@"\{newFileName}";
+            var filepath = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images")).Root + $@"{newFileName}";
             using (FileStream fs = File.Create(filepath))
             {
                 file.CopyTo(fs);
@@ -30,6 +30,26 @@ namespace MoviesWeb.Utils
             }
 
             return newFileName;
+        }
+
+        public static bool DeleteFile(string relativeFilePath)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(relativeFilePath))
+                {
+                    var actualPath = Path.Combine(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")).Root, relativeFilePath);
+                    if (File.Exists(actualPath))
+                    {
+                        File.Delete(actualPath);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

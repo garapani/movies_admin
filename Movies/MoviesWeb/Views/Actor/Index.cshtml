@@ -34,7 +34,7 @@
                         @Html.DisplayNameFor(model => model.Actors[0].Description)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Actors[0].UpdatedAt)
+                        @Html.DisplayNameFor(model => model.Actors[0].LastModifiedAt)
                     </th>
                     <th></th>
                 </tr>
@@ -53,7 +53,7 @@
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.UpdatedAt)
+                            @Html.DisplayFor(modelItem => item.LastModifiedAt)
                         </td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
