@@ -20,9 +20,12 @@ namespace MoviesWeb.Utils
 
             // concatenating  FileName + FileExtension
             var newFileName = String.Concat(myUniqueFileName, fileExtension);
+            var imagesPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images");
+            if (!Directory.Exists(imagesPath))
+                Directory.CreateDirectory(imagesPath);
 
             // Combines two strings into a path.
-            var filepath = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images")).Root + $@"{newFileName}";
+            var filepath = new PhysicalFileProvider(imagesPath).Root + $@"{newFileName}";
             using (FileStream fs = File.Create(filepath))
             {
                 file.CopyTo(fs);

@@ -9,7 +9,7 @@ namespace ApplicationCore.Specifications.DirectorSpecifications
         {
             Query.Where(d => d.DirectorId == id);
             Query.Include(d => d.Image);
-            Query.Include(d => d.MovieDirectors);
+            Query.Include(d => d.MovieDirectors).ThenInclude(o => o.Movie);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Common.Interfaces.Repositories;
+using ApplicationCore.Specifications.DirectorSpecifications;
 using Domain.Entity;
 using MediatR;
 using System.Threading;
@@ -16,7 +17,7 @@ namespace ApplicationCore.Features.DirectorFeatures.Queries
 
         public async Task<Director> Handle(GetDirectorByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _asyncRepository.GetByIdAsync(request.Id);
+            return await _asyncRepository.FirstOrDefaultAsync(new GetDirectorWithItemsSpecification(request.Id));
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MoviesWeb.CustomAttributes.Validation;
+using MoviesWeb.ViewModels.MovieDirector;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MoviesWeb.ViewModels.Director
@@ -40,5 +42,6 @@ namespace MoviesWeb.ViewModels.Director
 
         [Display(Name = "Created by")]
         public string CreatedBy { get; set; }
+        public IEnumerable<MovieDirectorViewModel> MovieDirectors { get; set; }
     }
 }

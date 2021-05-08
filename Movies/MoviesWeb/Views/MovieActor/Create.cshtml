@@ -106,19 +106,7 @@
             }
 
             function formatRepoSelection(repo) {
-                $("#selectedActorLabel").css("visibility", "visible");
-                $("#selectedActorImage").css("visibility", "visible");
-                $("#selectedActorLabel").text(`${repo.name}`);
-                $("#selectedActorImage").attr("src", `~/${repo.imageUrl}`);
                 return repo.name;
-                //console.log(repo.imageUrl);
-                //var $container = $(`
-                //     <div>
-                //        <img src='${repo.imageUrl}' style='width:50px;height:50px;object-fit:cover' />
-                //        <p>${repo.name}</p>
-                //    </div>
-                //    `);
-                //return $container;
             }
         });
     </script>

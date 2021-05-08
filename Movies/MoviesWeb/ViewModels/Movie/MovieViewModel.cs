@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MoviesWeb.CustomAttributes.Validation;
 using MoviesWeb.ViewModels.MovieActor;
+using MoviesWeb.ViewModels.MovieDirector;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -65,5 +66,6 @@ namespace MoviesWeb.ViewModels.Movie
         public string LastModifiedBy { get; set; }
 
         public IEnumerable<MovieActorViewModel> MovieActors { get; set; }
+        public IEnumerable<MovieDirectorViewModel> MovieDirectors { get; set; }
     }
 }

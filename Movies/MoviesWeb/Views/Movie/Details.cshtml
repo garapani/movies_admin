@@ -47,16 +47,22 @@
                 @Html.DisplayFor(model => model.RunTime)
             </dd>
             @*<dt class="col-2">
-                @Html.DisplayNameFor(model => model.Tagline)
-            </dt>
-            <dd class="col-10">
-                @Html.DisplayFor(model => model.Tagline)
-            </dd>*@
+            @Html.DisplayNameFor(model => model.Tagline)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.Tagline)
+        </dd>*@
             <dt class="col-2">
-                @Html.DisplayNameFor(model => model.MovieActors) 
+                @Html.DisplayNameFor(model => model.MovieActors)
             </dt>
             <dd class="col-10">
                 @await Html.PartialAsync("../Shared/_ActorsInSingleLinePartial", Model.MovieActors)
+            </dd>
+            <dt class="col-2">
+                @Html.DisplayNameFor(model => model.MovieDirectors)
+            </dt>
+            <dd class="col-10">
+                @await Html.PartialAsync("../Shared/_DirectorsInSingleLinePartial", Model.MovieDirectors)
             </dd>
             <dt class="col-2">
                 @Html.DisplayNameFor(model => model.CreatedAt)

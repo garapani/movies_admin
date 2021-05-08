@@ -30,6 +30,12 @@
                 @Html.DisplayFor(model => model.Description)
             </dd>
             <dt class="col-2">
+                @Html.DisplayNameFor(model => model.MovieDirectors)
+            </dt>
+            <dd class="col-10">
+                @await Html.PartialAsync("../Shared/_MoviesInSingleLineForDirectorPartial", Model.MovieDirectors)
+            </dd>
+            <dt class="col-2">
                 @Html.DisplayNameFor(model => model.CreatedAt)
             </dt>
             <dd class="col-10">
